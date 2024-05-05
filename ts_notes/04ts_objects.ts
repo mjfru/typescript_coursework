@@ -31,3 +31,22 @@ printName({first: 'Mick', last: 'Jagger', age:473})
 const mick = {first: 'Mick', last: 'Jagger', age:473}
 printName(mick);
 //? It's OK! Why?? - Generally if you have a variable with the properties you need and TS will only check if first and last are there. TS figures anything else called in the function is a mistake.
+
+/*
+! Type Alias
+* Instead of writing out object types in annotation, we can delcare them seperaterly in a type alias, which is simply the desired shape of the object.
+? This allows us to make our code more readable and even reuse the types elsewhere in our code.
+*/
+
+// A type alias:
+type Person = {
+    name: string;
+    age: number;
+}
+
+// Using the type alias in the annotation:
+const sayHappyBirthday = (person: Person) => {
+    return `Hey ${person.name}, congrats on turning ${age}.`
+}
+
+sayHappyBirthday({name: 'Jerry', age: 42})
