@@ -26,7 +26,7 @@ function randomCoordinate(): {x: number, y: number} {
 
 // What happens when you add extra properties??
 // It's not allowed!
-printName({first: 'Mick', last: 'Jagger', age:473})
+// printName({first: 'Mick', last: 'Jagger', age:473})
 // However, if we put this in a variable first...
 const mick = {first: 'Mick', last: 'Jagger', age:473}
 printName(mick);
