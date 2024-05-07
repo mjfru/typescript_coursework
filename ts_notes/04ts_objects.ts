@@ -45,8 +45,110 @@ type Person = {
 }
 
 // Using the type alias in the annotation:
-const sayHappyBirthday = (person: Person) => {
-    return `Hey ${person.name}, congrats on turning ${age}.`
+// const sayHappyBirthday = (person: Person) => {
+//     return `Hey ${person.name}, congrats on turning ${age}.`
+// }
+
+// sayHappyBirthday({name: 'Jerry', age: 42})
+
+/*
+! Nested Objects Example
+*/
+
+type Song = {
+    title: string;
+    artist: string;
+    numStreams: number;
+    credits: { producer: string; writer: string };
 }
 
-sayHappyBirthday({name: 'Jerry', age: 42})
+function calculatePayout(song: Song): number {
+    return song.numStreams * 0.0033;
+}
+
+function printSong(song: Song): void {
+    console.log(`${song.title} - ${song.artist}`)
+}
+
+const mySong: Song = {
+    title: "Unchained Meloy",
+    artist: "Righeous Brothers",
+    numStreams: 12954812,
+    credits: {
+        producer: "Phil Spector",
+        writer: "Alex North"
+    }
+}
+
+const earnings = calculatePayout(mySong);
+console.log(earnings);
+printSong(mySong);
+
+//? What happens if you want an optional key-value pair??
+//! Add a '?' before the type annotation
+type Point = {
+    x: number;
+    y: number;
+    z?: number
+}
+
+const myPoint: Point = { x:1, y:2, z:3}
+const myPoint2: Point = { x:3, y:2}
+
+/*
+! The readonly modifier
+* We can mark properties in an object as readonly using TypeScript!
+*/
+
+type User = {
+    readonly id: number,
+    username: string;
+};
+
+const user: User = {
+    id: 20948,
+    username: 'Dogluver223'
+}
+
+console.log(user.id) //* OK
+// user.id = 394892 //! Error
+
+/*
+! Intersection Type
+* We can have multiple types and then combine them with the '&'.
+*/
+
+type Circle = {
+    radius: number;
+};
+
+type Colorful = {
+    color: string;
+};
+
+type ColorfulCircle = Circle & Colorful;
+
+const happyFace: ColorfulCircle = {
+    radius: 4,
+    color: 'yellow'
+};
+
+//? Now, let's give the intersection type an original property
+
+type Cat = {
+    numLives: number
+}
+
+type Dog = {
+    breed: string
+}
+
+type CatDog = Cat & Dog & {
+    age: number;
+}
+
+const rover: CatDog = {
+    numLives: 7,
+    breed: 'Husky',
+    age: 8
+}
